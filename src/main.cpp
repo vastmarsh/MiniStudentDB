@@ -1,3 +1,9 @@
+/*
+ * main.cpp
+ * MiniStudentDB 主程序入口
+ * 实现菜单展示与用户输入处理，并调用 Database 执行 CRUD 操作
+ */
+
 #include <iostream>
 #include <string>
 #include "database.h"

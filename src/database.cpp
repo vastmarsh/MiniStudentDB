@@ -1,3 +1,9 @@
+/*
+ * database.cpp
+ * SQLite 数据库封装类
+ * 提供数据库打开、关闭与 SQL 执行功能
+ */
+
 #include "database.h"
 #include <iostream>
 
