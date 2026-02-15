@@ -7,6 +7,15 @@
 #include "database.h"
 #include <iostream>
 
+// 回调函数：打印 SELECT 查询结果
+static int callback(void* NotUsed, int argc, char** argv, char** colName) {
+    for (int i = 0; i < argc; i++) {
+        std::cout << colName[i] << " = " << (argv[i] ? argv[i] : "NULL") << "  ";
+    }
+    std::cout << std::endl;
+    return 0;
+}
+
 Database::Database(const std::string& filename) {
     // 尝试打开数据库
     if (sqlite3_open(filename.c_str(), &db) != SQLITE_OK) {
@@ -34,7 +43,7 @@ Database::~Database() {
 bool Database::execute(const std::string& sql) {
     char* errMsg = nullptr;
 
-    int rc = sqlite3_exec(db, sql.c_str(), nullptr, nullptr, &errMsg);
+    int rc = sqlite3_exec(db, sql.c_str(), callback, nullptr, &errMsg);
 
     if (rc != SQLITE_OK) {
         std::cerr << "SQL error: " << errMsg << std::endl;
